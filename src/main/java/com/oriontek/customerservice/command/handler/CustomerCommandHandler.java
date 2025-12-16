@@ -33,6 +33,7 @@ public class CustomerCommandHandler {
         return customer.getId();
     }
 
+    @Transactional
     public void handle(UpdateCustomerCommand command) {
         log.info("Handling UpdateCustomerCommand for ID: ", command.getId());
 
@@ -74,7 +75,7 @@ public class CustomerCommandHandler {
                     );
                 });
 
-        // 2. Aplicar Soft Delete: Establecer la marca de tiempo de eliminación
+        // 2. Aplicar Soft Delete: Tiempo de eliminación
         customer.setDeletedAt(Instant.now());
 
         // 3. Persistir el cambio

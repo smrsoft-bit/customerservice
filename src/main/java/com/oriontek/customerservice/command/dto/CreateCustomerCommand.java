@@ -1,6 +1,7 @@
 package com.oriontek.customerservice.command.dto;
 
 import java.util.List;
+import java.util.UUID;
 
 public record CreateCustomerCommand(
         String name,
@@ -8,5 +9,5 @@ public record CreateCustomerCommand(
         String phone,
         List<AddressDto> addresses
 ) {
-    public record AddressDto(String street, String city) {}
+    public record AddressDto(UUID customer_id, String name) {}
 }
