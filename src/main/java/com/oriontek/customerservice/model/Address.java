@@ -1,11 +1,13 @@
 package com.oriontek.customerservice.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 @Entity
-@Table(name = "address")
+@Builder
+@Table(name = "address", schema ="core")
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class Address extends BaseEntity{
@@ -14,6 +16,6 @@ public class Address extends BaseEntity{
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @Column(name="name")
+    @Column(name="name", nullable = false)
     private String name;
 }

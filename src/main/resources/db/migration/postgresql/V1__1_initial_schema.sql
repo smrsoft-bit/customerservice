@@ -17,7 +17,7 @@ CREATE TABLE core.customer (
 CREATE TABLE core.address (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     customer_id UUID NOT NULL,
-    street VARCHAR(500) NOT NULL,
+    name VARCHAR(500) NOT NULL,
 
     created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
     modified_at TIMESTAMP WITHOUT TIME ZONE,

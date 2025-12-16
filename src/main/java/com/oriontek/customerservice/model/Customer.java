@@ -1,22 +1,27 @@
 package com.oriontek.customerservice.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
-@Table(name = "customer")
+@Table(name = "customer", schema ="core")
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
+@Builder
 @EqualsAndHashCode(callSuper = true)
 public class Customer  extends BaseEntity{
-    @Column(name="name")
+    @Column(name="name", nullable = false)
     private String name;
 
-    @Column(name="email")
+    @Column(name="email", nullable = false, unique = true)
     private String email;
 
-    @Column(name="phone")
+    @Column(name="phone", nullable = false, unique = true)
     private String phone;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY )
+    private List<Address> addresses;
 }
