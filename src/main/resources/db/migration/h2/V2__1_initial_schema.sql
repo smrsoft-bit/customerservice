@@ -1,0 +1,28 @@
+CREATE TABLE core.customer (
+    id UUID PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    phone VARCHAR(10) UNIQUE NOT NULL,
+    created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+    modified_at TIMESTAMP WITHOUT TIME ZONE,
+    deleted_at TIMESTAMP WITHOUT TIME ZONE -- Soft Delete
+);
+
+ALTER TABLE core.customer ALTER COLUMN id SET DEFAULT RANDOM_UUID();
+
+CREATE TABLE core.address (
+    id UUID PRIMARY KEY,
+    customer_id UUID NOT NULL,
+    name VARCHAR(500) NOT NULL,
+
+    created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+    modified_at TIMESTAMP WITHOUT TIME ZONE,
+    deleted_at TIMESTAMP WITHOUT TIME ZONE,
+
+    CONSTRAINT fk_customer
+        FOREIGN KEY(customer_id)
+        REFERENCES core.customer(id)
+        ON DELETE CASCADE
+);
+
+ALTER TABLE core.address ALTER COLUMN id SET DEFAULT RANDOM_UUID();
